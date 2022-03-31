@@ -1,11 +1,12 @@
-function [ref]= make_reference(em_txt_file,SpecID,emiss_filter_index)
+function [ref]= make_reference(em_txt_file,wavelength,emiss_filter_index)
 % em_txt is typially the full emission spectra downloaded from elsewhere
 % em_txt is typically has two columns: wavelength and normalized emission
-% SpecID represent the ID of spectrometers, 1-4 equals SpecA-D
+% wavelength is a vector to specifiy the wavelength range and values. 
+% wavelength vector typically copied from the header of the raw data file
 % emiss_filter_index ==2 means dual emission filter
 % emiss_filter_index ==4 means quad_emiss_filter
 
-load ~/Documents/MATLAB/HemoCorrectionData/BasicParameters.mat;
+load EmissionFilters.mat;
 if emiss_filter_index == 2
     emiss_filter = dual_emiss_interp;
 else if emiss_filter_index == 4
@@ -15,26 +16,12 @@ end
 emiss_filter_wave = single(emiss_filter(:,1));
 emiss_filter_value = emiss_filter(:,2);
 
-if SpecID == 1
-    wavelength = WavelengthA;
-end
-
-if SpecID == 2
-    wavelength = WavelengthA;
-end
-
-if SpecID == 3
-    wavelength = WavelengthA;
-end
-if SpecID == 4
-    wavelength = WavelengthA;
-end
-
 em = dlmread(em_txt_file);
 em_wave = em(:,1);
 em_wave_upsample = single((em_wave(1):0.1:em_wave(end))');
 em_value = em(:,2);
 em_upsample = interp1(em_wave,em_value,em_wave_upsample);
+
 wave_round = round(wavelength,1);
 wave_short = single(wave_round);
 
