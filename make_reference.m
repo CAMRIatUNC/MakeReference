@@ -1,7 +1,7 @@
 function [ref]= make_reference(em_txt_file,wavelength,emiss_filter_index)
 % em_txt is typially the full emission spectra downloaded from elsewhere
 % em_txt is typically has two columns: wavelength and normalized emission
-% wavelength is a vector to specifiy the wavelength range and values. 
+% wavelength is a column vector to specifiy the wavelength range and values. 
 % wavelength vector typically copied from the header of the raw data file
 % emiss_filter_index ==2 means dual emission filter
 % emiss_filter_index ==4 means quad_emiss_filter
@@ -44,4 +44,5 @@ for i = 1:length(wave_short)
 end    
 
 ref = ref';
- 
+
+ref = [wavelength,ref]; 
