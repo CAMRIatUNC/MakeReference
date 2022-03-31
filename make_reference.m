@@ -44,5 +44,3 @@ for i = 1:length(wave_short)
 end    
 
 ref = ref';
-
-ref = [wavelength,ref]; 
