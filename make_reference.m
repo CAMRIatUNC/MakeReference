@@ -1,10 +1,11 @@
 function [ref]= make_reference(em_txt_file,wavelength,emiss_filter_index)
 % em_txt is typially the full emission spectra downloaded from elsewhere
-% em_txt is typically has two columns: wavelength and normalized emission
+% em_txt has two columns: wavelength and normalized emission
 % wavelength is a column vector to specifiy the wavelength range and values. 
-% wavelength vector typically copied from the header of the raw data file
+% wavelength is copied from the header of the raw data file generated from the spectrometer
 % emiss_filter_index ==2 means dual emission filter
 % emiss_filter_index ==4 means quad_emiss_filter
+% Weiting Zhang, 04/07/2022 
 
 load EmissionFilters.mat;
 if emiss_filter_index == 2
